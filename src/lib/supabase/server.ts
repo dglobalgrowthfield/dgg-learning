@@ -1,5 +1,5 @@
-import { createServerClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { createServerClient } from "@supabase/auth-helpers-nextjs"
+import { cookies } from "next/headers"
 
 export const createClient = () =>
   createServerClient(
@@ -8,14 +8,14 @@ export const createClient = () =>
     {
       cookies: {
         get(name: string) {
-          return cookies().get(name)?.value;
+          return cookies().get(name)?.value
         },
         set(name: string, value: string, options: any) {
-          cookies().set(name, value, options);
+          cookies().set({ name, value, ...options })
         },
         remove(name: string, options: any) {
-          cookies().delete(name);
+          cookies().delete({ name, ...options })
         },
       },
     }
-  );
+  )
